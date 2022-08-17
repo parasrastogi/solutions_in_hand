@@ -10,7 +10,7 @@ Item _$ItemFromJson(Map<String, dynamic> json) => Item(
       json['name'] as String,
       json['gender'] as String,
       json['image_url'] as String,
-      DateTime.parse(json['time'] as String),
+      DateTime.parse((json['time'] as Timestamp).toDate().toString() ),
     );
 
 Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{

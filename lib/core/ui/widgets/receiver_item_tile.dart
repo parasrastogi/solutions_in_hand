@@ -38,7 +38,7 @@ class _ReceiverItemTileWidget extends State<ReceiverItemTile>{
                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                      children: [
                        Text(widget.item.itemName),
-                       Image.network(widget.item.imageUrl),
+                       Image.network(widget.item.imageUrl, width: 100, height: 100,),
                      ],
                    ),
                    Column(
