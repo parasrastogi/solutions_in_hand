@@ -8,14 +8,14 @@ part of 'item.dart';
 
 Item _$ItemFromJson(Map<String, dynamic> json) => Item(
       json['name'] as String,
-      json['gender'] as String,
+   //   json['gender'] as String,
       json['image_url'] as String,
-      DateTime.parse((json['time'] as Timestamp).toDate().toString() ),
+    //  DateTime.parse((json['time'] as Timestamp).toDate().toString() ),
     );
 
 Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{
       'name': instance.itemName,
-      'gender': instance.gender,
+     // 'gender': instance.gender,
       'image_url': instance.imageUrl,
-      'time': instance.dateTime.toIso8601String(),
+     // 'time': instance.dateTime?.toIso8601String() ?? '',
     };

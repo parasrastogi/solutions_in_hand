@@ -13,6 +13,7 @@ class _ReceiverItemTileWidget extends State<ReceiverItemTile>{
   @override
   Widget build(BuildContext context) {
      return Card(
+       color: Colors.brown.withOpacity(0.2),
        child: IntrinsicHeight(
          child: Row(
            children: [
@@ -21,11 +22,11 @@ class _ReceiverItemTileWidget extends State<ReceiverItemTile>{
                fit: FlexFit.tight,
                child: Column(
                  children: [
-                   widget.item.gender == 'M' ?
+                 //  widget.item.gender == 'M' ?
                    Image.asset('assets/images/male_logo.png',
                      width: 60, height: 60,
-                   ) : Image.asset('assets/images/female_logo.png',
-                     width: 60, height: 60,),
+                   ), //: Image.asset('assets/images/female_logo.png',
+                    // width: 60, height: 60,),
                  ],
                ),
              ),

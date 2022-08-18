@@ -7,13 +7,13 @@ part 'item.g.dart';
 class Item{
   @JsonKey(name: "name")
   final String itemName;
-  final String gender;
+ // final String gender;
   @JsonKey(name: "image_url")
   final String imageUrl;
-  @JsonKey(name: 'time')
-  final DateTime dateTime;
+//  @JsonKey(name: 'time')
+ // final DateTime? dateTime;
 
-  Item(this.itemName, this.gender, this.imageUrl, this.dateTime);
+  Item(this.itemName, this.imageUrl,);
 
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
   Map<String, dynamic> toJson() => _$ItemToJson(this);

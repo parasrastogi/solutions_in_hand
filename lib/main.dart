@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:solutions_in_hand/core/ui/widgets/receiver_item_tile.dart';
+import 'package:solutions_in_hand/screens/user_role_selection/user_role_screen.dart';
 import 'core/model/item.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const UserRoleScreen(),
     );
   }
 }
@@ -212,12 +213,12 @@ class _MyHomePageState extends State<MyHomePage>  with TickerProviderStateMixin{
 
             var map =  res.data();
              var issues = map!['issues'] as DocumentReference;
-
+            print(issues.path);
+            getCollection(issues);
             issues.get().then((value) {
               print("issues get -->${value.data()}");
-              print("issues ref -->${value.reference}");
+              print("issues ref -->${value.reference.path}");
             });
-
 
             querySnapshot.collection("${entityWashRoomDoc.path}/${issues.path}/washroom_options").get().then((value) {
               value.docs.map((e) {
@@ -228,6 +229,24 @@ class _MyHomePageState extends State<MyHomePage>  with TickerProviderStateMixin{
       onError: (e) => print("Error completing: $e"),
     );
   }
+
+  getCollection(DocumentReference reference) {
+    reference.collection('washroom_options').withConverter(fromFirestore: Item.fromFirestore, toFirestore: (Item item, _) => item.toFirestore())
+        .snapshots()
+        .listen((event) {
+    final list =  event.docs;
+    itemList.clear();
+    setState(() {
+    itemList =  list .map((item) => item.data()).toList();
+
+    _newVoiceText = "Attention Please";
+    _speak();
+
+    });
+
+    });
+  }
+
 
   Future _getDefaultEngine() async {
     var engine = await flutterTts.getDefaultEngine;
